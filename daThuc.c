@@ -43,9 +43,10 @@ void he_so_tong(int a[], int b[], int c[], int n, int m){
         c[i] = a[i] + b[i];
 }
 
-void in_gia_tri(int a[], int n, int x, char ten){
-    int i, s = 0;
-    for(i = 0; i <= n; i++){
+void in_gia_tri(int a[], int n, int m, int x, char ten){
+    int i, s = 0, max;
+    (m > n) ? max = m : max = n;
+    for(i = 0; i <= max; i++){
         s += a[i]*pow(x,i);
     }
     printf("da thuc %c = %d", ten, s);
@@ -61,6 +62,7 @@ int main()
     do{
         menu();
         printf("\n--> Nhap lua chon: ");
+        fflush(stdin);
         select = getchar();
         switch(select){
             case '1':
@@ -78,7 +80,7 @@ int main()
             case '4':
                 in_gia_tri(P, n, x, 'P');
                 in_gia_tri(Q, m, x, 'Q');
-                in_gia_tri(T, m+n, x, 'T');
+                in_gia_tri(T, n, m, x, 'T');
         }
     } while(select != '5');
 
