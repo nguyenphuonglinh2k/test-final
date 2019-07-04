@@ -1,0 +1,84 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <malloc.h>
+
+typedef struct sinh_vien {
+    char ho_ten[30];
+    float diem_tb;
+    struct sinh_vien *next;
+} sv;
+
+sv *pH, *pT;
+
+void menu(){
+    printf("1. Tao danh sach sinh vien \n");
+    printf("2. Hien thi danh sach sinh vien \n");
+    printf("3. Chen them sinh vien\n");
+    printf("4. Xóa một sinh viên\n");
+    printf("5. Sửa một sinh viên\n");
+    printf("6. Ket thuc\n");
+}
+
+sv *taoNode(){
+    sv *p;
+    p = (sv *)malloc(sizeof(sv));
+    fflush(stdin);
+    printf("nhap ho va ten: ");
+    gets(p->ho_ten);
+    printf("nhap diem trung binh: ");
+    scanf("%f", p->diem_tb);
+    p->next = NULL;
+    return p;
+}
+
+void addTail(sv *p){
+    if(pH == NULL) pH = pT = p;
+    else {
+        pT->next = p;
+        pT = p;
+    }
+}
+
+void tao_ds(int *n){
+    int i;
+    sv *p;
+    pH=pT= NULL;
+
+    printf("NHAP DANH SACH SINH VIEN.\n");
+
+    printf("\nNhap so luong sinh vien can tao: ");
+    scanf("%d", n);
+    for(i = 0; i < *n; i++){
+        p = taoNode();
+        addTail(p);
+    }
+}
+
+void in_ds(){
+    sv *p;
+    printf("/n\nHIEN THI DANH SACH/N");
+    printf("stt\t\tHo ten\t\t\t\t\tDiem trung binh\n");
+    for(p = pH; p != NULL; p = p->next)
+        printf("%d\t\t%s\t\t\t\t\t%.2f\n", dem++, p->ho_ten, p->diem_tb);
+}
+
+int main()
+{
+    int n, select;
+    do {
+        menu();
+        printf("\n-->Nhap lua chon: ");
+        scanf("%d", &select);
+        switch(select){
+            case 1:
+                tao_ds(&n);
+                break;
+            case 2:
+                in_ds();
+                break;
+        }
+    } while(select != 6);
+
+    return 0;
+}
